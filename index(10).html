@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>7R1 — Расписание и домашние задания</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet">
+<style>
+:root{--text:#fff;--muted:#8e8e8e;--nav-text:#2e2e2e;--pill-dark:#28282a;--nav-shadow:0 4px 14px rgba(0,0,0,.16);
+--trust-border:rgba(255,255,255,.4);--trust-text:#c4c2c3;--red:#ff6b6b;
+--font-sans:"Inter","Segoe UI",system-ui,sans-serif;--font-display:"BubbledotICG-FinePos","Courier New",monospace}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;color:#fff;font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+.bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#8a6f9a,#3a2440 45%,#000 80%);overflow:hidden}
+.bg-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:0}
+.page{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;height:100vh;height:100dvh;overflow:hidden;padding:clamp(16px,2.4vh,28px) clamp(14px,3vw,32px) calc(clamp(16px,2.4vh,28px) + 16px)}
+.anim{opacity:0;transform:translateY(22px) scale(.98);filter:blur(6px);animation:reveal .85s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d,0s)}
+@keyframes reveal{to{opacity:1;transform:none;filter:none}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
+@keyframes headlineFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.15),0 0 22px rgba(255,255,255,.32),0 0 44px rgba(255,255,255,.12)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.3),0 0 32px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.25)}}
+header{display:flex;align-items:center;justify-content:center;gap:clamp(18px,2.8vw,28px);width:100%;max-width:720px;flex-shrink:0;position:relative;z-index:10;animation:slideDown .7s cubic-bezier(.22,1,.36,1) both}
+.logo{width:clamp(40px,4.4vw,46px);height:clamp(40px,4.4vw,46px);border-radius:50%;background:#fff;box-shadow:var(--nav-shadow);display:grid;place-items:center;border:0;cursor:pointer;transition:transform .3s}
+.logo:hover{transform:scale(1.04)}.logo svg{width:60%;height:60%}
+nav{background:#fff;border-radius:999px;height:clamp(44px,5.2vw,48px);max-width:430px;flex:1;padding:4px 8px;display:flex;justify-content:space-around;align-items:center;box-shadow:var(--nav-shadow)}
+nav a{position:relative;font-weight:500;font-size:clamp(13px,1.4vw,15px);letter-spacing:-.01em;color:var(--nav-text);opacity:.5;text-decoration:none;cursor:pointer;padding:6px 8px;transition:opacity .2s}
+nav a:hover{opacity:.75}nav a.act{opacity:1}
+nav a.act::after{content:"";position:absolute;left:50%;bottom:-1px;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:#000;box-shadow:-5px 0 #000,5px 0 #000}
+.pill{background:var(--pill-dark);color:#c8c8c8;border:0;border-radius:999px;height:clamp(44px,5.2vw,48px);padding:0 22px;font:500 14px var(--font-sans);cursor:pointer;box-shadow:var(--nav-shadow);transition:.2s}
+.pill:hover{background:#323234;color:#fff;transform:translateY(-1px)}
+.cls{position:relative}
+.clsmenu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border-radius:18px;padding:6px;min-width:150px;box-shadow:0 20px 60px rgba(0,0,0,.45);animation:fade .25s ease both}
+.clsmenu[hidden]{display:none}
+.clsmenu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:10px 14px;font:500 14px var(--font-sans);color:#2e2e2e;cursor:pointer}
+.clsmenu button:hover{background:#eee}.clsmenu button.act{background:#000;color:#fff}
+.row.hwrow{grid-template-columns:70px minmax(0,1fr) minmax(0,1.3fr)}
+.row .e{color:var(--muted)}
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;max-width:900px;width:100%;min-height:0}
+.trust{--s:clamp(36px,4.5vw,42px);display:inline-flex;align-items:center;margin-bottom:clamp(16px,2.5vh,26px)}
+.av{width:var(--s);height:var(--s);border-radius:50%;background:var(--pill-dark);border:1px solid var(--trust-border);padding:5px;transition:transform .35s}
+.av i{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#fff;color:#111;font:700 calc(var(--s)*.3)/1 var(--font-sans);font-style:normal}
+.av+.av{margin-left:calc(var(--s)*-.42)}.av:nth-child(1){z-index:1}.av:nth-child(2){z-index:2}.av:nth-child(3){z-index:4}
+.av:nth-child(1):hover,.av:nth-child(3):hover{transform:translateY(-2px)}.av:nth-child(2):hover{transform:translateY(-4px)}
+.tp{height:var(--s);display:flex;align-items:center;margin-left:calc(var(--s)*-.42);padding:0 16px 0 calc(var(--s)*.58);background:var(--pill-dark);border:1px solid var(--trust-border);border-radius:999px;color:var(--trust-text);font-weight:500;font-size:clamp(12px,1.4vw,13.5px);z-index:3;white-space:nowrap}
+h1{margin:0 0 clamp(14px,2vh,20px);font:400 clamp(28px,6.2vw,80px)/1.12 var(--font-display);letter-spacing:-.04em;color:#fff;white-space:nowrap;overflow:hidden}
+h1 span{display:block;opacity:0;animation:headlineFade .85s cubic-bezier(.22,1,.36,1) forwards}
+h1 span:nth-child(1){animation-delay:.12s}h1 span:nth-child(2){animation-delay:.3s}
+.subh{max-width:min(500px,92%);font-size:clamp(15.5px,calc(1.55vw + 2pt),18.5px);color:#d0d0d0;opacity:.8;line-height:1.55;margin:0 0 clamp(16px,3vh,28px)}
+.cta{background:#fff;color:#000;border:0;border-radius:999px;font:600 clamp(13.5px,1.5vw,14.5px) var(--font-sans);padding:clamp(11px,1.6vh,13px) clamp(22px,3vw,28px);cursor:pointer;transition:transform .25s;box-shadow:0 0 0 1px rgba(255,255,255,.15),0 0 22px rgba(255,255,255,.32),0 0 44px rgba(255,255,255,.12)}
+.cta:hover{transform:translateY(-2px) scale(1.02)}
+.cta.anim{animation:reveal .85s cubic-bezier(.22,1,.36,1) forwards,pulse 3s ease-in-out 1.6s infinite}
+.stats{flex-shrink:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;max-width:920px;text-align:center}
+.stats .ic{font:400 clamp(22px,3vw,33px)/1 var(--font-display);margin-bottom:6px}
+.stats .v{font-size:clamp(18px,2.2vw,26px);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.stats .l{color:var(--muted);font-size:clamp(11px,1.2vw,12.5px);margin-top:2px}
+.panel{position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow-y:auto;padding:90px 16px 40px;display:none}
+.panel.on{display:block;animation:fade .4s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.close{position:fixed;bottom:calc(48px + env(safe-area-inset-bottom,0px));right:20px;z-index:11;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:var(--pill-dark);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:none;transition:.2s}
+.close:hover{background:#fff;color:#000;transform:rotate(90deg)}
+.panel.on~.close{display:block;animation:fade .4s ease both}
+.back{display:block;margin:30px auto 0;background:var(--pill-dark);color:#c8c8c8;border:0;border-radius:999px;padding:12px 26px;font:500 14px var(--font-sans);cursor:pointer}
+.back:hover{background:#fff;color:#000}
+.credit{position:fixed;right:14px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:12;font-size:11px;letter-spacing:.02em;color:var(--muted);pointer-events:none}
+.credit b{color:#c8c8c8;font-weight:500}
+.wrap{max-width:760px;margin:0 auto;padding-bottom:40px}
+.wrap h2{margin:0 0 4px;font-size:24px}
+.note{color:var(--muted);font-size:13px;margin:0 0 6px}.warn{color:var(--red)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.tab{background:var(--pill-dark);color:#c8c8c8;border:0;border-radius:999px;padding:9px 14px;font:500 14px var(--font-sans);cursor:pointer}
+.tab.act{background:#fff;color:#000}
+.row{display:grid;grid-template-columns:70px 105px 1fr;gap:8px;padding:11px 14px;background:rgba(40,40,42,.8);border:1px solid rgba(255,255,255,.14);border-radius:12px;margin-bottom:6px;font-size:15px;opacity:0;animation:rowIn .5s cubic-bezier(.22,1,.36,1) forwards;animation-delay:calc(var(--i)*.05s)}
+@keyframes rowIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.row .n,.row .t{color:var(--muted);font-variant-numeric:tabular-nums}
+.row.lunch,.row.lunch .n,.row.lunch .t{color:var(--red);border-color:var(--red);font-weight:600}
+.sec{margin-top:28px}.sec h3{margin:0 0 10px}
+form{display:grid;gap:8px}
+select,input,textarea{background:rgba(40,40,42,.9);border:1px solid rgba(255,255,255,.14);color:#fff;border-radius:10px;padding:11px;font:inherit;width:100%}
+.hw{background:rgba(40,40,42,.8);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;gap:10px;animation:reveal .5s forwards;opacity:0}
+.hw small{color:var(--muted);display:block;margin-top:2px}.hw button{background:none;border:0;color:var(--red);font-size:22px;cursor:pointer}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}.pill{padding:0 14px;font-size:13px}.cl{display:none}.row.hwrow{grid-template-columns:48px minmax(0,1fr) minmax(0,1.2fr)}h1{letter-spacing:-.08em}.row{grid-template-columns:48px 90px 1fr;padding:10px;font-size:14px}}
+@media(max-width:420px){h1{letter-spacing:-.09em}.tp{font-size:12px}}
+@media(max-height:700px){.stats .ic{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}}
+</style>
+</head>
+<body>
+<div class="bg">
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="page">
+  <header>
+    <button class="logo" onclick="show('home')" aria-label="Главная"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5Zm-8 9v6l8 4 8-4v-6l-8 4-8-4Z" fill="#000"/></svg></button>
+    <nav>
+      <a id="n-home" class="act" onclick="show('home')">Главная</a>
+      <a id="n-sched" onclick="show('sched','sched')">Расписание</a>
+      <a id="n-hw" onclick="show('sched','hw')">Домашка</a>
+    </nav>
+    <div class="cls"><button class="pill" onclick="toggleCls()" aria-label="Выбор класса"><span class="cl">Класс: </span><b id="clsName">7R1</b> ▾</button><div class="clsmenu" id="clsMenu" hidden></div></div>
+  </header>
+
+  <main class="hero">
+    <div class="trust anim" style="--d:.05s">
+      <div class="av"><i>7</i></div><div class="av"><i>R</i></div><div class="av"><i>1</i></div>
+      <div class="tp">Класс 7R1 · Шахбазова С.Ш.</div>
+    </div>
+    <h1><span>Schedule</span><span>&amp; Homework</span></h1>
+    <p class="subh anim" style="--d:.28s">Расписание уроков и домашние задания класса 7R1 — всё в одном месте, всегда под рукой.</p>
+    <button class="cta anim" style="--d:.4s" onclick="show('sched')">Переход к расписаниям</button>
+  </main>
+
+  <footer class="stats">
+    <div class="anim" style="--d:.5s"><div class="ic">&lt;</div><div class="v" data-t="45" data-s=" мин" data-d="0">0</div><div class="l">Длительность урока</div></div>
+    <div class="anim" style="--d:.58s"><div class="ic">%</div><div class="v" data-t="8" data-s="" data-d="0">0</div><div class="l">Уроков в день</div></div>
+    <div class="anim" style="--d:.66s"><div class="ic">*</div><div class="v" data-t="5" data-s="" data-d="0">0</div><div class="l">Учебных дней</div></div>
+    <div class="anim" style="--d:.74s"><div class="ic">#</div><div class="v" data-t="40" data-s="" data-d="0">0</div><div class="l">Уроков в неделю</div></div>
+  </footer>
+</div>
+
+<section class="panel" id="sched">
+  <div class="wrap">
+    <h2 id="ttl">Расписание 7R1</h2>
+    <p class="note">Кл. руководитель: Шахбазова С.Ш.</p>
+    <p class="note warn" id="warn">Администрация школы оставляет за собой право при необходимости вносить коррективы в расписание класса.</p>
+    <div class="tabs" id="modes"></div>
+    <div class="tabs" id="tabs"></div>
+    <div id="day"></div>
+    <button class="back" onclick="show('home')">← Выйти на главную</button>
+  </div>
+</section>
+<div class="credit">Создатели: <b>7R1</b></div>
+<button class="close" onclick="show('home')" aria-label="Закрыть">✕</button>
+
+<script>
+const T=["8:00–8:45","8:50–9:35","9:40–10:25","10:30–11:15","11:20–12:05","12:10–12:55","13:00–13:40","13:45–14:25","14:30–15:10"];
+const D={
+"Понедельник":["IT","Русский язык","Биология","Физика","Франц./Нем. язык","ОБЕД","Азербайджанский язык","Английский язык","Литература"],
+"Вторник":["Русский язык","История Азербайджана","Математика","Математика","Английский язык","ОБЕД","Conv. (англ.)","Химия","Физкультура"],
+"Среда":["Азербайджанский язык","Английский язык","География","Математика","Математика","ОБЕД","IT","Физика","Франц./Нем. язык"],
+"Четверг":["Русский язык","Литература","Биология","Всеобщая история","Математика","ОБЕД","Английский язык","Азербайджанский язык","Conv. (az.)"],
+"Пятница":["Английский язык","Математика","Математика","Мой Азербайджан","Логика","ОБЕД","География","Химия","Математика на английском"]};
+const names=Object.keys(D);
+let cur=Math.min(Math.max(new Date().getDay()-1,0),4);
+const $=id=>document.getElementById(id);
+const H={}; // домашка: H["7R1"]["Понедельник"]=[урок1,...,урок9] — пока пусто
+const CLASSES=["7R1"];
+let cls="7R1",mode="sched";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function show(v,m){
+  mode=m||'sched';
+  $('sched').classList.toggle('on',v==='sched');
+  $('n-home').classList.toggle('act',v==='home');
+  $('n-sched').classList.toggle('act',v==='sched'&&mode==='sched');
+  $('n-hw').classList.toggle('act',v==='sched'&&mode==='hw');
+  if(v==='sched'){render();$('sched').scrollTo(0,0)}
+}
+function render(){
+  const hwm=mode==='hw';
+  $('ttl').textContent=(hwm?'Домашние задания ':'Расписание ')+cls;
+  $('warn').style.display=hwm?'none':'';
+  $('modes').innerHTML=[['sched','Расписание'],['hw','Домашка']].map(([k,l])=>`<button class="tab ${mode===k?'act':''}" onclick="show('sched','${k}')">${l}</button>`).join('');
+  $('tabs').innerHTML=names.map((n,i)=>`<button class="tab ${i===cur?'act':''}" onclick="cur=${i};render()">${n}</button>`).join('');
+  const lessons=D[names[cur]];
+  if(!hwm){
+    $('day').innerHTML=lessons.map((s,i)=>`<div class="row ${s==='ОБЕД'?'lunch':''}" style="--i:${i}"><span class="n">${i+1} урок</span><span class="t">${T[i]}</span><span>${s}</span></div>`).join('');
+  }else{
+    const h=(H[cls]&&H[cls][names[cur]])||[];
+    $('day').innerHTML=lessons.map((s,i)=>s==='ОБЕД'?'':`<div class="row hwrow" style="--i:${i}"><span class="n">${i+1} урок</span><span>${s}</span><span class="e">${h[i]?esc(h[i]):'Пока пусто'}</span></div>`).join('');
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')show('home')});
+function buildCls(){$('clsMenu').innerHTML=CLASSES.map(c=>`<button class="${c===cls?'act':''}" onclick="pickCls('${c}')">${c}</button>`).join('')}
+function toggleCls(){$('clsMenu').hidden=!$('clsMenu').hidden}
+function pickCls(c){cls=c;$('clsName').textContent=c;$('clsMenu').hidden=true;buildCls();render()}
+document.addEventListener('click',e=>{if(!e.target.closest('.cls'))$('clsMenu').hidden=true});
+buildCls();
+const ease=t=>1-Math.pow(1-t,3);
+const vs=[...document.querySelectorAll('.stats .v')];
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return;io.unobserve(en.target);
+  const el=en.target,i=vs.indexOf(el),t=+el.dataset.t,dur=1500+i*80;
+  setTimeout(()=>{const st=performance.now();(function f(n){const p=Math.min((n-st)/dur,1);el.textContent=(t*ease(p)).toFixed(+el.dataset.d)+el.dataset.s;if(p<1)requestAnimationFrame(f)})(st)},480+i*90);
+}),{threshold:.25});
+vs.forEach(v=>io.observe(v));
+</script>
+</body>
+</html>
