@@ -35,7 +35,7 @@ nav a.act::after{content:"";position:absolute;left:50%;bottom:-1px;width:3px;hei
 .clsmenu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:12px;padding:10px 14px;font:500 14px var(--font-sans);color:#2e2e2e;cursor:pointer}
 .clsmenu button:hover{background:#eee}.clsmenu button.act{background:#000;color:#fff}
 .row.hwrow{grid-template-columns:70px minmax(0,1fr) minmax(0,1.3fr)}
-.row .e{color:var(--muted)}
+.row .e{color:var(--muted);white-space:pre-line}
 .hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;max-width:900px;width:100%;min-height:0}
 .trust{--s:clamp(36px,4.5vw,42px);display:inline-flex;align-items:center;margin-bottom:clamp(16px,2.5vh,26px)}
 .av{width:var(--s);height:var(--s);border-radius:50%;background:var(--pill-dark);border:1px solid var(--trust-border);padding:5px;transition:transform .35s}
@@ -146,7 +146,17 @@ const D={
 const names=Object.keys(D);
 let cur=Math.min(Math.max(new Date().getDay()-1,0),4);
 const $=id=>document.getElementById(id);
-const H={}; // домашка: H["7R1"]["Понедельник"]=[урок1,...,урок9] — пока пусто
+const H={"7R1":{"Среда":[
+"Учебник, стр. 16, номера a и b",
+"Workbook, page 9, exercise 5",
+"Учебник, стр. 10–11; задание № 1 выполнить в тетради",
+"Учебник: стр. 18 № 5; стр. 19 № 9 и 11; стр. 20 № 15 и 17. Выучить все правила",
+"См. д/з выше (4 урок)",
+"",
+"",
+"Учебник, параграф 1.1; рабочая тетрадь, стр. 3–4, номера 1–12",
+"Французский: Apprendre le vocabulaire p. 10; ex 7 p. 11\nНемецкий: Arbeitsbuch Seite 5, Übung 5"
+]}}; // домашка: H["7R1"]["Понедельник"]=[урок1,...,урок9]
 const CLASSES=["7R1"];
 let cls="7R1",mode="sched";
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
